@@ -330,5 +330,27 @@
 
   <script src="js/content.js"></script>
   <script src="js/main.js"></script>
+
+  <!-- Site-wide falling rose petals, like gentle snowfall -->
+  <div class="petal-rain" id="petal-rain" aria-hidden="true"></div>
+  <script>
+    (() => {
+      const layer = document.getElementById('petal-rain');
+      if (!layer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const count = window.matchMedia('(max-width: 600px)').matches ? 13 : 22;
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('span');
+        petal.className = 'falling-petal';
+        petal.style.left = (Math.random() * 100) + 'vw';
+        petal.style.animationDuration = (11 + Math.random() * 13) + 's';
+        petal.style.animationDelay = (-Math.random() * 24) + 's';
+        petal.style.setProperty('--drift', (Math.random() * 180 - 90) + 'px');
+        petal.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
+        petal.style.setProperty('--petal-size', (9 + Math.random() * 10) + 'px');
+        petal.style.opacity = (0.38 + Math.random() * 0.42).toFixed(2);
+        layer.appendChild(petal);
+      }
+    })();
+  </script>
 </body>
 </html>
